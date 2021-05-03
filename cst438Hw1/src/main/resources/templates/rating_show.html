@@ -1,0 +1,17 @@
+person_show.html
+
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Movie Rating</title>
+</head>
+<body>
+	<h2 th:inline="text">Hello [[${person.firstName}]] </h2>
+
+	First name: <span th:inline="text"> [[${person.firstName}]] </span> <br />
+	Last name: <span th:inline="text"> [[${person.lastName}]] </span> <br /> 
+	Movie Title: <span th:inline="text"> [[${person.movieTitle}]] </span> <br />
+	Movie Rating: <span th:inline="text"> [[${person.rating}]] </span> <br />
+
+</body>
+</html>
