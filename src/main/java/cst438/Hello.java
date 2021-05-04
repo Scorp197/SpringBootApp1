@@ -15,44 +15,35 @@ public class Hello {
 	@Autowired
 	MovieRepository movieRepository;
 	
-	@GetMapping("/movies/new")
-	public String createMovie( Model model) 
-	{
-		Movie movie = new Movie();
-		model.addAttribute("movie", movie);
-		return "movie_form";
-	}
-	
 	@GetMapping("/movies")
 	public String getAllMovieRating(Model model) 
 	{	
-		Iterable<Movie> movieRating = movieRepository.findAllOrderByMovieTitleMovieRatingDesc();
-		model.addAttribute("movie", movieRating);
+		Iterable<MovieRating> movies = movieRepository.findAllOrderByMovieTitleMovieRatingDesc();
+		model.addAttribute("movies", movies);
 		return "movie_list"; 
 	}
 	
 	@PostMapping("/movies/new")
-	public String processMovieForm(@Valid Movie movie, 
+	public String processMovieForm(@Valid MovieRating movie, 
 			BindingResult result, 
 			Model model) {
-		model.addAttribute("time", new java.util.Date().toString());
+		model.addAttribute("movie", movie); //new line added
 		
 		if (result.hasErrors()) {
 			return "movie_form";
 		}	
+		movie.setDate(new java.util.Date().toString());		
 		movieRepository.save(movie);
-//		model.addAttribute("movieRepository", movieRepository); //new line added
 		return "movie_show";
 	}
 	
+	
+	@GetMapping("/movies/new")
+	public String createMovieRating(Model model) 
+	{
+		MovieRating movie = new MovieRating();
+		model.addAttribute("movie", movie);
+		return "movie_form";
+	}
+
 }
-
-
-//	@GetMapping("/person")
-//	public String getAllPeople(Model model) {
-//		Iterable<Movie> people = personRepository.findAllOrderByLastNameFavoriteFoodDesc();
-//		model.addAttribute("persons", people);
-//		return "person_list";
-//		
-//	}
-//}

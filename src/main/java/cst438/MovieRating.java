@@ -3,11 +3,13 @@ package cst438;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Movie {
+public class MovieRating {
 	
 	@Id
 	@GeneratedValue
@@ -18,18 +20,23 @@ public class Movie {
 	private String firstName;
 	
 	@NotNull
-	@Size(min=1, max=25)
+	@Min(1)
+	@Max(25)
 	private Integer movieRating;
 	
 	@NotNull
 	@Size(min=3, max=25)
 	private String movieTitle;
 	
-	public Movie() {
+	
+	private String date;
+	
+	
+	public MovieRating() {
 		
 	}
 	
-	public Movie(long id, String firstName, @NotNull @Size(min = 3, max = 25) Integer movieRating, String movieTitle) {
+	public MovieRating(long id, String firstName, @NotNull Integer movieRating, String movieTitle) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -62,6 +69,16 @@ public class Movie {
 
 	public void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	} 
+	
+	
 	
 }
