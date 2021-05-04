@@ -1,57 +1,58 @@
 package cst438;
 
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class Hello { 
+public class Hello {  
 	
 	@Autowired
-	PersonRepository personRepository;
+	MovieRepository movieRepository;
 	
-	
-	@GetMapping("/hello") //localhost:8080/hello?name=christal
-	public String hello(@RequestParam("name") String name, Model model) {
-		model.addAttribute("name", name);
-		model.addAttribute("time", new java.util.Date().toString());
-		return "index";
-	
+	@GetMapping("/movies/new")
+	public String createMovie( Model model) 
+	{
+		Movie movie = new Movie();
+		model.addAttribute("movie", movie);
+		return "movie_form";
 	}
 	
-	@GetMapping("/person/new")
-	public String createPerson(Model model) {
-		Person person = new Person();
-		model.addAttribute("person", person);
-		return "person_form";
+	@GetMapping("/movies")
+	public String getAllMovieRating(Model model) 
+	{	
+		Iterable<Movie> movieRating = movieRepository.findAllOrderByMovieTitleMovieRatingDesc();
+		model.addAttribute("movie", movieRating);
+		return "movie_list"; 
 	}
 	
-	@PostMapping("/person")
-	public String processPersonForm(@Valid Person person, 
+	@PostMapping("/movies/new")
+	public String processMovieForm(@Valid Movie movie, 
 			BindingResult result, 
 			Model model) {
+		model.addAttribute("time", new java.util.Date().toString());
+		
 		if (result.hasErrors()) {
-			return "person_form";
-		}
-		personRepository.save(person);	
-		return "person_show";
-		
+			return "movie_form";
+		}	
+		movieRepository.save(movie);
+//		model.addAttribute("movieRepository", movieRepository); //new line added
+		return "movie_show";
 	}
-		
-	@GetMapping("/person")
-	public String getAllPeople(Model model) {
-		Iterable<Person> people = personRepository.findAll();
-		model.addAttribute("persons", people);
-		return "person_list";
-	}
+	
 }
 
 
+//	@GetMapping("/person")
+//	public String getAllPeople(Model model) {
+//		Iterable<Movie> people = personRepository.findAllOrderByLastNameFavoriteFoodDesc();
+//		model.addAttribute("persons", people);
+//		return "person_list";
+//		
+//	}
+//}

@@ -7,40 +7,39 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Person {
+public class Movie {
 	
 	@Id
 	@GeneratedValue
 	private long id;
 	
 	@NotNull
-	@Size(min=3,max=25)
+	@Size(min=3, max=25)
 	private String firstName;
 	
 	@NotNull
-	@Size(min=3,max=25)
-	private String lastName;
+	@Size(min=1, max=25)
+	private Integer movieRating;
 	
 	@NotNull
-	@Size(min=3,max=25)
-	private String favoriteFood;
+	@Size(min=3, max=25)
+	private String movieTitle;
 	
-	public Person() {
+	public Movie() {
 		
 	}
-		
 	
-	public Person(long id, String firstName, String lastName, String favoriteFood) {
+	public Movie(long id, String firstName, @NotNull @Size(min = 3, max = 25) Integer movieRating, String movieTitle) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
-		this.lastName = lastName;
-		this.favoriteFood = favoriteFood;
+		this.movieRating = movieRating;
+		this.movieTitle = movieTitle;
 	}
 	
 	public long getId() { return id; }
 	public void setId(long id) { this.id = id;}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -49,20 +48,20 @@ public class Person {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public Integer getMovieRating() {
+		return movieRating;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setMovieRating(Integer movieRating) {
+		this.movieRating = movieRating;
 	}
 
-	public String getFavoriteFood() {
-		return favoriteFood;
+	public String getMovieTitle() {
+		return movieTitle;
 	}
 
-	public void setFavoriteFood(String favoriteFood) {
-		this.favoriteFood = favoriteFood;
-	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	} 
+	
 }
-

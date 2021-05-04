@@ -4,11 +4,11 @@
     <title>Person</title>
 </head>
 <body>
-	<h2 th:inline="text">Hello [[${person.firstName}]] </h2>
+	<h2 th:inline="text">Hello [[${movies.firstName}]] </h2>
 	
-	First name: <span th:inline="text"> [[${person.firstName}]] </span> <br />
-	Last name: <span th:inline="text"> [[${person.lastName}]] </span> <br /> 
-	Favorite food: <span th:inline="text"> [[${person.favoriteFood}]] </span> <br /> 
+	First name: <span th:inline="text"> [[${movies.firstName}]] </span> <br />
+	Movie rating: <span th:inline="text"> [[${movies.movieRating}]] </span> <br /> 
+	Movie Title: <span th:inline="text"> [[${movies.movieTitle}]] </span> <br /> 
 	
 </body>
 </html>
